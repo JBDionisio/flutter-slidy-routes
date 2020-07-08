@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:teste_slidy/app/modules/compra/components/card_produto.dart';
 import 'package:teste_slidy/app/shared/produto_model.dart';
 import 'compra_controller.dart';
 
@@ -33,12 +34,9 @@ class _CompraPageState extends ModularState<CompraPage, CompraController> {
         body: ListView.builder(
             itemCount: widget.produtos.length,
             itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                title: Text(widget.produtos[index].nome),
-                subtitle: Text((widget.produtos[index].preco.toString())),
-                leading: CircleAvatar(
-                  child: Text("P${widget.produtos[index].id}"),
-                ),
+              return CardProduto(
+                nome: widget.produtos[index].nome,
+                preco: widget.produtos[index].preco,
               );
             }));
   }
