@@ -4,10 +4,9 @@ import 'package:teste_slidy/app/shared/produto_model.dart';
 import 'compra_controller.dart';
 
 class CompraPage extends StatefulWidget {
-  final ProdutoModel produtoModel;
+  final List<ProdutoModel> produtos;
   final String title;
-  const CompraPage(
-      {Key key, this.title = "Compra", @required this.produtoModel})
+  const CompraPage({Key key, this.title = "Compra", @required this.produtos})
       : super(key: key);
 
   @override
@@ -20,43 +19,27 @@ class _CompraPageState extends ModularState<CompraPage, CompraController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.produtoModel.nome),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {
-              Modular.link.pushNamed("/carrinho/vindo do compra");
-            },
-          )
-        ],
-      ),
-      body: Column(
-        children: <Widget>[
-          Card(
-            margin: EdgeInsets.all(15),
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Text("Produto: "),
-                      Text("${widget.produtoModel.id} - ${widget.produtoModel.nome}"),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text("Preço: "),
-                      Text("${widget.produtoModel.preco}")
-                    ],
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );
+        appBar: AppBar(
+          title: Text("teste"),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                Modular.link.pushNamed("/carrinho/vindo do compra");
+              },
+            )
+          ],
+        ),
+        body: ListView.builder(
+            itemCount: widget.produtos.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                title: Text(widget.produtos[index].nome),
+                subtitle: Text((widget.produtos[index].preco.toString())),
+                leading: CircleAvatar(
+                  child: Text("P${widget.produtos[index].id}"),
+                ),
+              );
+            }));
   }
 }

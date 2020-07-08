@@ -15,7 +15,7 @@ class CompraModule extends ChildModule {
   List<Router> get routers => [
         Router(Modular.initialRoute,
             child: (_, args) => CompraPage(
-                  produtoModel: args.data,
+                  produtos: args.data,
                 )),
         Router("/carrinho", module: CarrinhoModule()),
       ];

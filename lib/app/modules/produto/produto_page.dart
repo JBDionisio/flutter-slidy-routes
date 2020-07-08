@@ -19,17 +19,22 @@ class _ProdutoPageState extends ModularState<ProdutoPage, ProdutoController> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.nomeDaLoja),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                Modular.to.pushNamed("/compra/", arguments: controller.produtos);
+              },
+            )
+          ],
         ),
         body: ListView.builder(
           itemCount: 20,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
               onTap: () {
-                Modular.to.pushNamed("/compra/",
-                    arguments: ProdutoModel(
-                        id: index,
-                        nome: "Produtos $index",
-                        preco: 3.0 * index));
+                controller.addProduct(ProdutoModel(
+                    id: index, nome: "Produto$index", preco: 3.0 * index));
               },
               title: Text("Produtos $index"),
               subtitle: Text("Melhor produto"),
